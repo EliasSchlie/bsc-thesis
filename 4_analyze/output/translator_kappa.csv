@@ -1,0 +1,2 @@
+scope,kappa,se,ci_lo,ci_hi,n,observed_agreement,chance_agreement,n_present_present,n_present_absent,n_absent_present,n_absent_absent
+overall,0.8661,0.0915,0.6867,1.0454,30,0.9333,0.5022,13,1,1,15

@@ -1,0 +1,31 @@
+[project]
+name = "bsc-thesis"
+version = "1.0.0"
+description = "Supplementary materials and pipeline code for the BSc thesis 'How does scenario framing affect deceptive tendencies in LLMs?'"
+readme = "README.md"
+license = { text = "CC-BY-SA-4.0" }
+authors = [{ name = "Elias Schlie" }]
+requires-python = ">=3.11"
+
+# Pinned to the versions used to produce the artifacts in this repository
+# (recorded 2026-05; see 1_translate/logs/manifest.json for the translator
+# run timestamp).
+dependencies = [
+    "openai==2.30.0",            # routes target-model + judge calls via OpenRouter
+    "httpx==0.28.1",             # underlies the OpenAI client
+    "tqdm==4.67.1",              # progress bars in bench/run.py
+    "claude-agent-sdk==0.1.59",  # only the translator (1_translate) uses this
+]
+
+[project.optional-dependencies]
+# Linting / formatting; not required to run the pipeline.
+dev = [
+    "ruff>=0.6.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["code"]

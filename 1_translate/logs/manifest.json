@@ -1,0 +1,58 @@
+{
+  "stage": "translate",
+  "model": "claude-opus-4-7",
+  "started_at": 1776861386.298838,
+  "finished_at": 1776874426.836269,
+  "input_path": "1_translate/input/original.jsonl",
+  "input_sha256": "9083d4d06fa0092d9b9d91094a736929aaa805c1af8c8f597ccf378d4a57ecba",
+  "output_path": "1_translate/output/translated.jsonl",
+  "output_sha256": "f4308b8eb5c5cae7198c2c70e6e159ad298a3b3d5ac7ccd075b0d5828adfa734",
+  "n_scenarios": 150,
+  "n_translated": 68,
+  "n_skipped": 82,
+  "n_errors": 0,
+  "steps": [
+    {
+      "step": "bulk_translate",
+      "run_id": "translate_1776861386",
+      "started_at": 1776861386.298838,
+      "finished_at": 1776861552.741483,
+      "args": {
+        "concurrency": 8,
+        "limit": null,
+        "retry_errors": false
+      },
+      "n_translated": 66,
+      "n_skipped": 77,
+      "n_errors": 7,
+      "output_sha256": "c31dcf1d807b2b9702ee1b1d38bdf37a664167e82d5df9ae722ccd8b23667f20"
+    },
+    {
+      "step": "apply_manual_overrides",
+      "run_id": "overrides_1776863001",
+      "started_at": 1776863001.664054,
+      "finished_at": 1776863001.668491,
+      "args": {
+        "override_ids": [24, 119, 121, 122, 123, 125, 138]
+      },
+      "n_translated": 68,
+      "n_skipped": 82,
+      "n_errors": 0,
+      "output_sha256": "c3c9427d4889aa56e589dcded68d75d0c08cf574822fe852152fba94b7aa4045"
+    },
+    {
+      "step": "retry",
+      "run_id": "translate_1776874390",
+      "started_at": 1776874390.019964,
+      "finished_at": 1776874426.836269,
+      "args": {
+        "retry_ids": [108]
+      },
+      "n_translated": 68,
+      "n_skipped": 82,
+      "n_errors": 0,
+      "output_sha256": "eb6c99a1a72b65f829149fc41746e9f3c241a82e5c9b86989600c9ce13c4958f"
+    }
+  ],
+  "scenario_logs": "scenarios/translate_<id>.jsonl for id in 0..149"
+}

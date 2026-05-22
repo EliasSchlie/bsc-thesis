@@ -1,0 +1,4 @@
+rq,rq_label,n_models,median,min,max,n_ci_excl_zero,n_above_substantive,n_pos_substantive,n_neg_substantive,n_pos_direction
+interaction,Sub-RQ3: wording x split interaction,8,0.08626780574538145,-0.14321055089363274,0.5757071115848011,1,1,1,0,6
+split,Sub-RQ2: delivery split (split vs single),8,1.213203528526786,-0.12301484889874881,2.130106973935968,6,6,6,0,7
+wording,Sub-RQ1: wording (interactive vs narrated),8,0.8566431344846315,-0.10407290692369472,2.317963305080721,6,6,6,0,7

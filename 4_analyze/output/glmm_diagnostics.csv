@@ -1,0 +1,9 @@
+slug,short,display,n_decept_min_cell,is_singular,conv_message,item_intercept_sd
+openai__gpt-4o-2024-08-06,gpt-4o,GPT-4o,55,FALSE,,2.654841640586311
+openai__gpt-5.4,gpt-5.4,GPT-5.4,3,FALSE,,6.681138315239592
+google__gemini-2.0-flash-001,gemini-2,Gemini-2-Flash,201,FALSE,,2.376091201064045
+google__gemini-3-flash-preview,gemini-3,Gemini-3-Flash,132,FALSE,,3.639115642663686
+deepseek__deepseek-r1,r1,DeepSeek-R1,138,FALSE,,2.392667982719294
+deepseek-ai__DeepSeek-V3.2,V3.2,DeepSeek-V3.2,53,FALSE,,1.9020743968688878
+qwen__qwen-2.5-7b-instruct,qwen2.5-7b,Qwen2.5-7B,197,FALSE,,1.876816887357568
+qwen__qwen3.5-9b,qwen3.5-9b,Qwen3.5-9B,3,FALSE,,6.5829584633640925
