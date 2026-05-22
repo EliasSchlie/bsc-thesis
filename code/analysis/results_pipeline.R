@@ -551,13 +551,16 @@ if (nzchar(OUT_FIG)) {
 }
 
 # --- Figure: forest plot, three planned contrasts per model ----------------
+# Strip text is overridden locally (two lines: formal contrast + direction gloss)
+# so the reader can tell at a glance which side of zero means "more deception".
+forest_strip <- c(
+  wording     = "Sub-RQ1: wording effect (interactive vs narrated)\nPositive values mean more deception under interactive wording",
+  split       = "Sub-RQ2: delivery-structure split (split vs single)\nPositive values mean more deception under split delivery",
+  interaction = "Sub-RQ3: wording x split interaction\nPositive values mean the wording effect is larger under split delivery"
+)
 forest_df <- contrast_df |>
   mutate(display = factor(display, levels = rev(DISPLAY_ORDER)),
-         rq_label = factor(rq_label, levels = c(
-           "Sub-RQ1: wording (interactive vs narrated)",
-           "Sub-RQ2: delivery split (split vs single)",
-           "Sub-RQ3: wording x split interaction"
-         )))
+         rq_label = factor(forest_strip[rq], levels = unname(forest_strip)))
 
 fig_forest <- ggplot(forest_df, aes(x = log_odds, y = display)) +
   geom_vline(xintercept = 0, linetype = "solid", color = "grey40", linewidth = 0.4) +
@@ -570,10 +573,10 @@ fig_forest <- ggplot(forest_df, aes(x = log_odds, y = display)) +
   labs(x = "Estimated log-odds difference (95% Wald CI)",
        y = NULL) +
   theme_thesis(base_size = 10) +
-  theme(panel.spacing = unit(0.9, "lines"),
-        strip.text = element_text(face = "bold", hjust = 0))
+  theme(panel.spacing = unit(1.1, "lines"),
+        strip.text = element_text(face = "bold", hjust = 0, lineheight = 1.15))
 
-save_fig(fig_forest, "fig_results_forest", width = 6.4, height = 8.4)
+save_fig(fig_forest, "fig_results_forest", width = 6.4, height = 8.9)
 
 # ----------------------------------------------------------------------------
 # 7. Per-model contrast table for the appendix (LaTeX, booktabs)

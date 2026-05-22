@@ -1,25 +1,27 @@
 """CLI entrypoint: plug a model, run it through the benchmark, judge the output.
 
 Examples:
-    # Generate Qwen responses on all 68 counterparty-present scenarios x 4 framings x 6 conds
-    python -m bench.run gen --model "Qwen/Qwen3-30B-A3B-Instruct-2507"
+    # Generate DeepSeek-R1 responses on all 68 counterparty-present scenarios x 4 framings x 6 conds
+    python -m bench.run gen --model "deepseek/deepseek-r1"
 
-    # Judge those with GPT-4o
+    # Judge those with gpt-5.4-nano (the thesis judge)
     python -m bench.run judge \\
-        --target-model "Qwen/Qwen3-30B-A3B-Instruct-2507" \\
-        --judge-model "gpt-4o-2024-08-06"
+        --target-model "deepseek/deepseek-r1" \\
+        --judge-model "openai/gpt-5.4-nano"
 
     # Generate + judge in one shot
     python -m bench.run all \\
-        --model "Qwen/Qwen3-30B-A3B-Instruct-2507" \\
-        --judge-model "gpt-4o-2024-08-06"
+        --model "deepseek/deepseek-r1" \\
+        --judge-model "openai/gpt-5.4-nano"
 
     # Smoke test on 2 scenarios only
-    python -m bench.run all --model "Qwen/Qwen3-30B-A3B-Instruct-2507" --limit 2
+    python -m bench.run all --model "deepseek/deepseek-r1" --limit 2
 
 Env (from .env; autoloaded if present):
-    NEBIUS_API_KEY, NEBIUS_BASE_URL (default: https://api.studio.nebius.ai/v1)
-    OPENAI_API_KEY, OPENAI_BASE_URL (default: OpenAI's standard endpoint)
+    OPENROUTER_API_KEY, OPENROUTER_BASE_URL (default: https://openrouter.ai/api/v1)
+    OPENAI_API_KEY, OPENAI_BASE_URL  (only if --target-via/--judge-via openai)
+    NEBIUS_API_KEY, NEBIUS_BASE_URL  (only if --target-via nebius or nebius-tf;
+                                      default: https://api.studio.nebius.ai/v1)
 """
 
 from __future__ import annotations
@@ -42,8 +44,8 @@ from bench.summarize import write_summary
 DEFAULT_NEBIUS_BASE_URL = "https://api.studio.nebius.ai/v1"
 DEFAULT_NEBIUS_TF_BASE_URL = "https://api.tokenfactory.us-central1.nebius.com/v1/"
 DEFAULT_OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
-DEFAULT_TARGET_MODEL = "Qwen/Qwen3-30B-A3B-Instruct-2507"
-DEFAULT_JUDGE_MODEL = "gpt-4o-2024-08-06"
+DEFAULT_TARGET_MODEL = "deepseek/deepseek-r1"
+DEFAULT_JUDGE_MODEL = "openai/gpt-5.4-nano"
 
 
 def _provider_config(provider: str) -> tuple[str, str, str]:
@@ -316,7 +318,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     g = sub.add_parser("gen", help="generate target-model responses", parents=[shared])
     g.add_argument("--model", default=DEFAULT_TARGET_MODEL)
-    g.add_argument("--target-via", choices=providers, default="nebius")
+    g.add_argument("--target-via", choices=providers, default="openrouter")
     g.add_argument(
         "--target-provider-order",
         default=None,
@@ -334,14 +336,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     j.add_argument("--target-model", default=DEFAULT_TARGET_MODEL)
     j.add_argument("--judge-model", default=DEFAULT_JUDGE_MODEL)
-    j.add_argument("--judge-via", choices=providers, default="openai")
+    j.add_argument("--judge-via", choices=providers, default="openrouter")
     j.set_defaults(func=cmd_judge)
 
     a = sub.add_parser("all", help="generate + judge in one run", parents=[shared])
     a.add_argument("--model", default=DEFAULT_TARGET_MODEL)
     a.add_argument("--judge-model", default=DEFAULT_JUDGE_MODEL)
-    a.add_argument("--target-via", choices=providers, default="nebius")
-    a.add_argument("--judge-via", choices=providers, default="openai")
+    a.add_argument("--target-via", choices=providers, default="openrouter")
+    a.add_argument("--judge-via", choices=providers, default="openrouter")
     a.add_argument(
         "--target-provider-order",
         default=None,

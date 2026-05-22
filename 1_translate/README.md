@@ -33,4 +33,4 @@ Validation utilities (counterparty-presence and spot-check UIs, κ computation) 
 
 ## Verification
 
-The 28-of-30 agreement reported in Appendix C corresponds to Cohen's κ ≈ 0.85 between the blind manual labeler and the translator on the counterparty-presence axis. The two disagreements are documented in Appendix C of the thesis.
+The 28-of-30 agreement reported in Appendix C corresponds to Cohen's κ = 0.87 (95 % Wald CI [0.69, 1.05]; see `4_analyze/output/translator_kappa.csv`) between the blind manual labeler and the translator on the counterparty-presence axis. The two disagreements are documented in Appendix C of the thesis.

@@ -1,4 +1,4 @@
-"""Translate one DeceptionBench scenario into behavioral (system + user) framing."""
+"""Translate one DeceptionBench scenario into interactive (system + user) framing."""
 
 from __future__ import annotations
 
@@ -19,7 +19,10 @@ CONDITION_KEYS = [
     "L2-other-reward",
 ]
 
-TRANSLATION_PROMPT_PATH = Path(__file__).resolve().parent / "prompts" / "translate.md"
+# code/translate/translate.py  →  parent.parent.parent = repo root
+TRANSLATION_PROMPT_PATH = (
+    Path(__file__).resolve().parent.parent.parent / "1_translate" / "prompt.md"
+)
 
 
 def build_system_prompt() -> str:
@@ -47,7 +50,7 @@ async def translate_scenario(
     log_file: str | Path,
     model: str | None = None,
 ) -> dict[str, Any]:
-    """Translate one scenario into behavioral framing.
+    """Translate one scenario into interactive framing.
 
     Per-variant translator errors (`{"error": "..."}`) are preserved in the
     output under that condition key. Whole-scenario failures (malformed JSON,
