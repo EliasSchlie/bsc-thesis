@@ -36,7 +36,7 @@ bsc-thesis/
     └── analysis/                      R + Python analysis scripts
 ```
 
-The thesis PDF (`thesis.pdf`) will be added when the report is final.
+The thesis PDF is at [`thesis.pdf`](thesis.pdf).
 
 ## Environment
 
